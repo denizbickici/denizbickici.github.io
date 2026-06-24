@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ThinkGraphs — Think While You Map</title>
+  <title>ThinkGraphs: Think While You Map</title>
   <meta name="description" content="Think While You Map: Asynchronous Vision-Language Agents for Incremental 3D Scene Graphs. An asynchronous architecture that keeps the 3D scene graph queryable from the first frame." />
   <meta property="og:title" content="Think While You Map: Asynchronous Vision-Language Agents for Incremental 3D Scene Graphs" />
   <meta property="og:description" content="An asynchronous architecture that decouples lightweight online mapping from heavyweight VLM reasoning." />
@@ -62,7 +62,7 @@
         <b>ThinkGraphs</b> decouples lightweight online mapping from heavyweight VLM reasoning, keeping the scene graph
         queryable from the first frame. Asynchronous background agents refine the graph without blocking the mapping loop:
         a <b>Critic Agent</b> detects and merges fragmented object tracks, and a <b>Description Agent</b> injects
-        fine-grained visual attributes — enabling complex grounding queries
+        fine-grained visual attributes. This enables complex grounding queries
         (e.g., <em>"the stainless steel refrigerator left of the TV"</em>) throughout exploration.
       </p>
     </div>
@@ -93,8 +93,8 @@
         <p class="cap">
           <b>Method overview.</b> (i) The <b>frontend</b> extracts grounded instances from each RGB-D frame.
           (ii) The <b>backend</b> associates them into persistent 3D tracks with probabilistic voxel scoring, while
-          (iii) spatial edges are derived deterministically from 3D geometry. (iv) Two asynchronous VLM agents — a
-          <b>Critic Agent</b> for semantic loop closure and a <b>Description Agent</b> for attribute enrichment —
+          (iii) spatial edges are derived deterministically from 3D geometry. (iv) Two asynchronous VLM agents, a
+          <b>Critic Agent</b> for semantic loop closure and a <b>Description Agent</b> for attribute enrichment,
           progressively refine the graph without blocking online operation.
         </p>
       </div>
@@ -106,7 +106,7 @@
         </li>
         <li>
           <strong>Semantic loop closure.</strong> A VLM-in-the-loop Critic Agent detects and merges duplicate object
-          tracks caused by incremental association drift — analogous to geometric loop closure in SLAM.
+          tracks caused by incremental association drift, similar to geometric loop closure in SLAM.
         </li>
         <li>
           <strong>Multi-target frame scheduler.</strong> The Description Agent is fed a small number of informative
@@ -134,7 +134,7 @@
       </div>
       <p style="margin-top:18px;color:var(--text-soft);font-size:.96rem">
         On open-vocabulary 3D semantic segmentation, ThinkGraphs outperforms all batch-based methods on Replica
-        (0.58 mAcc / 0.37 mIoU / 0.61 f-mIoU) and achieves the highest mIoU and f-mIoU on ScanNet — all while remaining
+        (0.58 mAcc / 0.37 mIoU / 0.61 f-mIoU) and achieves the highest mIoU and f-mIoU on ScanNet while remaining
         incremental and never requiring a complete reconstruction.
       </p>
     </section>
