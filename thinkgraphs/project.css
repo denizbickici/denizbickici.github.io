@@ -122,10 +122,11 @@
 
 .teaser img,
 .method-figure img {
-  box-sizing: border-box;
-  padding: 8px;
-  background: #fff;
-  border-radius: 4px;
+  display: block;
+  height: auto;
+  object-fit: contain;
+  padding: 0;
+  border-radius: 0;
 }
 .figure .cap {
   max-width: 860px;
