@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ThinkGraphs — Think While You Map</title>
+  <meta name="description" content="Think While You Map: Asynchronous Vision-Language Agents for Incremental 3D Scene Graphs. An asynchronous architecture that keeps the 3D scene graph queryable from the first frame." />
+  <meta property="og:title" content="Think While You Map: Asynchronous Vision-Language Agents for Incremental 3D Scene Graphs" />
+  <meta property="og:description" content="An asynchronous architecture that decouples lightweight online mapping from heavyweight VLM reasoning." />
+  <meta property="og:image" content="../assets/img/teaser.png" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="project.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧊</text></svg>" />
+</head>
+<body>
+
+  <main class="wrap">
+
+    <!-- ===================== HERO ===================== -->
+    <header class="proj-hero">
+      <div class="venue-badge">ECCV 2026</div>
+      <h1 class="title">Think While You Map</h1>
+      <p class="subtitle">Asynchronous Vision-Language Agents for Incremental 3D Scene Graphs</p>
+
+      <p class="authors-list">
+        <span class="me">Deniz Bickici</span><sup>1,2</sup>,
+        Michael Pabst<sup>1,2</sup>,
+        Shohei Mori<sup>1</sup>,
+        Dieter Schmalstieg<sup>1</sup>
+      </p>
+      <p class="affil-list">
+        <sup>1</sup>University of Stuttgart, VISUS &nbsp;·&nbsp;
+        <sup>2</sup>IMPRS-IS
+      </p>
+
+      <div class="btn-row">
+        <!-- Replace href="#" with the camera-ready PDF / arXiv / code links when available -->
+        <a class="btn disabled" href="#" aria-disabled="true">
+          <svg viewBox="0 0 24 24"><path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5z"/></svg>
+          Paper (soon)
+        </a>
+        <a class="btn disabled" href="#" aria-disabled="true">
+          <svg viewBox="0 0 24 24"><path d="M3 4h18v2H3zm0 7h18v2H3zm0 7h12v2H3z"/></svg>
+          arXiv (soon)
+        </a>
+        <a class="btn disabled" href="#" aria-disabled="true">
+          <svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.79 2.74 1.27 [IP_ADDRESS]-.76.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 [IP_ADDRESS] 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 [IP_ADDRESS].8 1.08.8 2.18v3.23c0 .[IP_ADDRESS].56A11.5 11.5 0 0 0 12 .5z"/></svg>
+          Code (soon)
+        </a>
+        <a class="btn" href="#bibtex">
+          <svg viewBox="0 0 24 24"><path d="M7 3h10a2 2 0 0 1 2 2v16l-7-3-7 3V5a2 2 0 0 1 2-2z"/></svg>
+          BibTeX
+        </a>
+      </div>
+    </header>
+
+    <!-- ===================== TEASER ===================== -->
+    <div class="teaser">
+      <img src="../assets/img/teaser.png" alt="ThinkGraphs overview: incremental scene graph, asynchronous agentic refinement, continuously queryable" />
+      <p class="cap">
+        <b>ThinkGraphs</b> decouples lightweight online mapping from heavyweight VLM reasoning, keeping the scene graph
+        queryable from the first frame. Asynchronous background agents refine the graph without blocking the mapping loop:
+        a <b>Critic Agent</b> detects and merges fragmented object tracks, and a <b>Description Agent</b> injects
+        fine-grained visual attributes — enabling complex grounding queries
+        (e.g., <em>"the stainless steel refrigerator left of the TV"</em>) throughout exploration.
+      </p>
+    </div>
+
+    <!-- ===================== ABSTRACT ===================== -->
+    <section class="section" id="abstract">
+      <h2>Abstract</h2>
+      <p class="abstract">
+        Open-vocabulary 3D scene graph methods typically operate in two stages: first reconstruct, then enrich with
+        vision-language models, leaving the graph unqueryable during exploration. We argue that this sequential coupling
+        is unnecessary and propose an <strong>asynchronous architecture</strong> in which lightweight online mapping runs
+        concurrently with heavyweight semantic refinement. A probabilistic voxel-based backbone maintains stable object
+        identities incrementally, while background VLM agents progressively enrich the graph. This framework resolves
+        duplicate object tracks through <strong>semantic loop closure</strong>, attaches fine-grained visual attributes,
+        and infers spatial relations between objects. A multi-target frame scheduler amortizes VLM cost by selecting a
+        small set of informative frames that jointly cover multiple targets. he resulting scene graph is queryable during 
+        exploration and grows in semantic richness over time.  Our method outperforms existing open-vocabulary 3D scene 
+        graph methods on semantic segmentation (ScanNet, Replica) and surpasses the prior state-of-the-art across three visual grounding benchmarks (Sr3D+, Nr3D, ScanRefer) by
+        15.3 to 18.8 A@0.25.
+      </p>
+    </section>
+
+    <!-- ===================== METHOD ===================== -->
+    <section class="section" id="method">
+      <h2>Method</h2>
+      <div class="figure">
+        <img src="../assets/img/method.png" alt="ThinkGraphs method overview: frontend, backend, relation generation, and asynchronous refinement" />
+        <p class="cap">
+          <b>Method overview.</b> (i) The <b>frontend</b> extracts grounded instances from each RGB-D frame.
+          (ii) The <b>backend</b> associates them into persistent 3D tracks with probabilistic voxel scoring, while
+          (iii) spatial edges are derived deterministically from 3D geometry. (iv) Two asynchronous VLM agents — a
+          <b>Critic Agent</b> for semantic loop closure and a <b>Description Agent</b> for attribute enrichment —
+          progressively refine the graph without blocking online operation.
+        </p>
+      </div>
+      <ul class="feat">
+        <li>
+          <strong>Asynchronous architecture.</strong> Lightweight online mapping is decoupled from heavyweight VLM
+          reasoning, yielding a graph that is queryable from the first frame and grows in semantic richness without
+          blocking exploration.
+        </li>
+        <li>
+          <strong>Semantic loop closure.</strong> A VLM-in-the-loop Critic Agent detects and merges duplicate object
+          tracks caused by incremental association drift — analogous to geometric loop closure in SLAM.
+        </li>
+        <li>
+          <strong>Multi-target frame scheduler.</strong> The Description Agent is fed a small number of informative
+          frames, each depicting multiple undescribed objects, so a single VLM call enriches several nodes at once.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== RESULTS ===================== -->
+    <section class="section" id="results">
+      <h2>Key Results</h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="num">+15.3</div>
+          <div class="lbl">A@0.25 over prior SOTA on Sr3D+ grounding</div>
+        </div>
+        <div class="stat">
+          <div class="num">+18.8</div>
+          <div class="lbl">A@0.25 over prior SOTA on Nr3D grounding</div>
+        </div>
+        <div class="stat">
+          <div class="num">+18.3</div>
+          <div class="lbl">A@0.25 over Open3DSG on ScanRefer grounding</div>
+        </div>
+      </div>
+      <p style="margin-top:18px;color:var(--text-soft);font-size:.96rem">
+        On open-vocabulary 3D semantic segmentation, ThinkGraphs outperforms all batch-based methods on Replica
+        (0.58 mAcc / 0.37 mIoU / 0.61 f-mIoU) and achieves the highest mIoU and f-mIoU on ScanNet — all while remaining
+        incremental and never requiring a complete reconstruction.
+      </p>
+    </section>
+
+    <!-- ===================== BIBTEX ===================== -->
+    <section class="section bibtex" id="bibtex">
+      <h2>BibTeX</h2>
+      <pre>@inproceedings{bickici2026thinkgraphs,
+  title     = {Think While You Map: Asynchronous Vision-Language Agents
+               for Incremental 3D Scene Graphs},
+  author    = {Bickici, Deniz and Pabst, Michael and Schmalstieg, Dieter},
+  booktitle = {Proceedings of the European Conference on Computer Vision (ECCV)},
+  year      = {2026}
+}</pre>
+      <p style="text-align:center;margin-top:24px">
+        <a class="back-link" href="../">← Back to homepage</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Deniz Bickici · Stuttgart, Germany
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
